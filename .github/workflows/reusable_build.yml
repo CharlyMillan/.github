@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+name: Deployment Base - build
+
+on:
+  workflow_call:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build-base:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Caching
+        uses: actions/cache@v3
+        id: my-cache
+        with:
+          path: my_new_file
+          key: ${{ github.workflow }}-${{ github.ref_name }}-${{ github.run_id }}-${{ github.run_number }}
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: creating file
+        run: |
+          touch my_new_file
+          echo "este es contenido del carchivo" > my_new_file
+
+      - name: Checking cache
+        if: steps.my-cache.outputs.cache-hit == 'true'
+        run: cat my_new_file
