@@ -3,6 +3,10 @@ name: Deployment Base - build
 
 on:
   workflow_call:
+    inputs:
+      docker_working_directory:
+        type: string
+        default: .
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,3 +35,7 @@ jobs:
       - name: Checking cache
         if: steps.my-cache.outputs.cache-hit == 'true'
         run: cat my_new_file
+
+      - name: docker build
+        working-directory: ${{ inputs.docker_working_directory }}
+        run: docker build -f Dockerfile . -t my-test
