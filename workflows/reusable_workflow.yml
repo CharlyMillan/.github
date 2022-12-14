@@ -1,0 +1,10 @@
+name: Reusable workflow example 
+
+on:
+  workflow_call:
+    
+jobs:
+  reusable-build:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "reusando workflow"
