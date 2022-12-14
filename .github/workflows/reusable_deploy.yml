@@ -21,7 +21,7 @@ jobs:
 
       - name: Checking cache
         if: steps.my-cache.outputs.cache-hit == 'true'
-        run: SE ENCONTRÓ CACHE
+        run: echo  SE ENCONTRÓ CACHE
 
       # Runs a single command using the runners shell
       - name: Kubernete deploy
