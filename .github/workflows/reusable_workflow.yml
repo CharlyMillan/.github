@@ -7,4 +7,5 @@ jobs:
   reusable-build:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "reusando workflow"
+      - name: testin reusable
+        run: echo "reusando workflow"
